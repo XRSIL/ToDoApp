@@ -4,10 +4,17 @@ import 'views/tasks_page/tasks_body.dart';
 import 'views/settings_page/settings_body.dart';
 import 'package:get/get.dart';
 import 'package:flutter/cupertino.dart';
+import 'models/tasks_dayblocks.dart';
 import 'package:hive/hive.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 
-void main() {
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Hive.initFlutter();
+  Hive.registerAdapter(DayBlocksAdapter());
+
+  await Hive.openBox<DayBlocks>('dayblocks');
+
   runApp(MyApp());
 }
 

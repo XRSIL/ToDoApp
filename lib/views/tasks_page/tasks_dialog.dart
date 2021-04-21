@@ -5,6 +5,7 @@ import 'package:flutter/cupertino.dart';
 
 class AddBlockDialog extends StatelessWidget {
   final DialogController controller = Get.put(DialogController());
+  final DialogTextController text_controller = Get.put(DialogTextController());
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -27,6 +28,8 @@ class AddBlockDialog extends StatelessWidget {
                       style: TextStyle(color: Color(0xFF007AFF), fontSize: 17),
                     ),
                     onPressed: () {
+                      text_controller.clearController();
+                      text_controller.changeValue('');
                       Navigator.of(context).pop();
                     },
                   )),
@@ -68,11 +71,20 @@ class AddBlockDialog extends StatelessWidget {
                               color: Color(0xFFBABABA), width: 0.5))),
                   margin: EdgeInsets.fromLTRB(0, 30, 0, 20),
                   child: CupertinoTextFormFieldRow(
+                    controller: text_controller.taskInputController,
+                    onChanged: (value) {
+                      text_controller.changeValue(value);
+                    },
                     maxLines: null,
                     placeholder: 'Task',
                     keyboardType: TextInputType.multiline,
                     autocorrect: true,
                   ),
+                ),
+                Center(
+                  child: Obx(() => (Text('${text_controller.text}',
+                      style:
+                          TextStyle(color: Color(0xFF000000), fontSize: 17)))),
                 ),
                 Column(
                   children: [
@@ -111,6 +123,7 @@ class AddBlockDialog extends StatelessWidget {
                               controller.changeDate(value);
                             },
                             initialDateTime: DateTime.now(),
+                            use24hFormat: true,
                           ),
                         )),
                     Container(
@@ -131,6 +144,8 @@ class AddBlockDialog extends StatelessWidget {
                                 color: Color(0xFF007AFF), fontSize: 17),
                           ),
                           onPressed: () {
+                            text_controller.clearController();
+                            text_controller.changeValue('');
                             Navigator.of(context).pop();
                           },
                         ),
