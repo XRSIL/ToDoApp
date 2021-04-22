@@ -4,16 +4,19 @@ import 'views/tasks_page/tasks_body.dart';
 import 'views/settings_page/settings_body.dart';
 import 'package:get/get.dart';
 import 'package:flutter/cupertino.dart';
-import 'models/tasks_dayblocks.dart';
+import 'models/tasks_dayblock_model.dart';
 import 'package:hive/hive.dart';
 import 'package:hive_flutter/hive_flutter.dart';
+
+// !! NOTE !!
+// If date is already in database, then add task to already existing block
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Hive.initFlutter();
-  Hive.registerAdapter(DayBlocksAdapter());
+  Hive.registerAdapter(DayBlockAdapter());
 
-  await Hive.openBox<DayBlocks>('dayblocks');
+  await Hive.openBox<DayBlock>('dayblocks');
 
   runApp(MyApp());
 }

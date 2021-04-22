@@ -13,7 +13,7 @@ class TasksPage extends StatelessWidget {
         child: Column(
           children: [
             Expanded(
-              child: (Text('f')),
+              child: Center(child: (Text('f'))),
             )
           ],
         ),

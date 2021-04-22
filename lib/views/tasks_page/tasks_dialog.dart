@@ -1,13 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:intl/intl.dart';
 import '../../controllers/tasks_page/tasks_dialog_controller.dart';
 import 'package:flutter/cupertino.dart';
 
 class AddBlockDialog extends StatelessWidget {
   final DialogController controller = Get.put(DialogController());
-  final DialogTextController text_controller = Get.put(DialogTextController());
   @override
   Widget build(BuildContext context) {
+    controller.getDaysList(controller.daysList);
     return Column(
       children: [
         Container(
@@ -28,8 +29,8 @@ class AddBlockDialog extends StatelessWidget {
                       style: TextStyle(color: Color(0xFF007AFF), fontSize: 17),
                     ),
                     onPressed: () {
-                      text_controller.clearController();
-                      text_controller.changeValue('');
+                      controller.clearController();
+                      controller.changeValue('');
                       Navigator.of(context).pop();
                     },
                   )),
@@ -71,9 +72,10 @@ class AddBlockDialog extends StatelessWidget {
                               color: Color(0xFFBABABA), width: 0.5))),
                   margin: EdgeInsets.fromLTRB(0, 30, 0, 20),
                   child: CupertinoTextFormFieldRow(
-                    controller: text_controller.taskInputController,
+                    controller: controller.taskInputController,
                     onChanged: (value) {
-                      text_controller.changeValue(value);
+                      controller.changeValue(value);
+                      controller.changeTask(value);
                     },
                     maxLines: null,
                     placeholder: 'Task',
@@ -82,7 +84,7 @@ class AddBlockDialog extends StatelessWidget {
                   ),
                 ),
                 Center(
-                  child: Obx(() => (Text('${text_controller.text}',
+                  child: Obx(() => (Text('${controller.text}',
                       style:
                           TextStyle(color: Color(0xFF000000), fontSize: 17)))),
                 ),
@@ -121,6 +123,7 @@ class AddBlockDialog extends StatelessWidget {
                           child: CupertinoDatePicker(
                             onDateTimeChanged: (DateTime value) {
                               controller.changeDate(value);
+                              controller.setDate(value);
                             },
                             initialDateTime: DateTime.now(),
                             use24hFormat: true,
@@ -144,9 +147,13 @@ class AddBlockDialog extends StatelessWidget {
                                 color: Color(0xFF007AFF), fontSize: 17),
                           ),
                           onPressed: () {
-                            text_controller.clearController();
-                            text_controller.changeValue('');
+                            controller.setTasks(controller.task.value);
+                            controller.addDayBlock(
+                                '${controller.date.value}', controller.tasks);
                             Navigator.of(context).pop();
+                            controller.clearDate();
+                            controller.clearController();
+                            controller.changeValue('');
                           },
                         ),
                       ),
