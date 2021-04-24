@@ -28,6 +28,7 @@ dependencies:
   hive_flutter: ^1.0.0
   date_util: ^0.1.4
   intl: ^0.16.0
+  flutter_swipe_action_cell: ^2.0.0
 
 
   # The following adds the Cupertino Icons font to your application.

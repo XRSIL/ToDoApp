@@ -87,5 +87,6 @@ class DialogController extends GetxController {
     final box = DialogController.getDayBlocks();
 
     input = box.values.toList();
+    daysList.value = input;
   }
 }

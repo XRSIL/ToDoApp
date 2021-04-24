@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:intl/intl.dart';
 import '../../controllers/tasks_page/tasks_dialog_controller.dart';
 import 'package:flutter/cupertino.dart';
 
@@ -8,7 +7,6 @@ class AddBlockDialog extends StatelessWidget {
   final DialogController controller = Get.put(DialogController());
   @override
   Widget build(BuildContext context) {
-    controller.getDaysList(controller.daysList);
     return Column(
       children: [
         Container(
@@ -150,6 +148,7 @@ class AddBlockDialog extends StatelessWidget {
                             controller.setTasks(controller.task.value);
                             controller.addDayBlock(
                                 '${controller.date.value}', controller.tasks);
+                            controller.getDaysList(controller.daysList);
                             Navigator.of(context).pop();
                             controller.clearDate();
                             controller.clearController();

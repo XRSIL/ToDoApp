@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
 import 'tasks_dialog.dart';
+import 'tasks_dayblocks.dart';
 
 class TasksPage extends StatelessWidget {
   @override
@@ -13,7 +14,7 @@ class TasksPage extends StatelessWidget {
         child: Column(
           children: [
             Expanded(
-              child: Center(child: (Text('f'))),
+              child: Center(child: DayListView()),
             )
           ],
         ),
@@ -36,12 +37,12 @@ class TasksPage extends StatelessWidget {
               height: 32,
               width: 32,
             ),
-            onPressed: () {
+            onPressed: () => {
               showCupertinoModalBottomSheet(
                   isDismissible: true,
                   expand: true,
                   context: context,
-                  builder: (context) => AddBlockDialog());
+                  builder: (context) => AddBlockDialog())
             },
             splashRadius: 20,
           ),
