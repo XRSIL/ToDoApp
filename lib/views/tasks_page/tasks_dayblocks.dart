@@ -2,6 +2,7 @@ import 'package:get/get.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import '../../controllers/tasks_page/tasks_dialog_controller.dart';
+import 'tasks_notes.dart';
 
 class DayListView extends StatelessWidget {
   final controller = Get.put(DialogController());
@@ -74,8 +75,9 @@ class DayListView extends StatelessWidget {
                         children: [
                           Container(
                             padding: EdgeInsets.only(left: 20),
-                            child:
-                                Text('${controller.daysList[index].notes[0]}'),
+                            child: NotesListView(
+                              content: controller.daysList[index].notes,
+                            ),
                           ),
                         ],
                       ),

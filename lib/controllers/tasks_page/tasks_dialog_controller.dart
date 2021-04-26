@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 import 'package:hive/hive.dart';
 import '../../models/tasks_dayblock_model.dart';
+import '../../models/tasks_notes_model.dart';
 
 class EachNote {
   bool radio;
@@ -62,17 +63,24 @@ class DialogController extends GetxController {
   Future addDayBlock(String date, List notes) {
     final dayblock = DayBlock()
       ..date = date
-      ..notes = notes;
+      ..notes = notes
+      ..datetime = DateTime.now();
+
+    final note = NoteModel()
+      ..radio = false
+      ..note = task.value
+      ..radioColor = '0xFFB4B4B4'
+      ..insideRadioColor = '0xFFFFFFFF';
 
     final box = DialogController.getDayBlocks();
 
     if (box.containsKey(dayblock.date) == true) {
       dayblock.notes = box.get(dayblock.date).notes;
-      dayblock.notes.add(task.value);
+      dayblock.notes.add(note);
       box.put(dayblock.date, dayblock);
       dayblock.save();
     } else {
-      dayblock.notes = [task.value];
+      dayblock.notes = [note];
       box.put(dayblock.date, dayblock);
       dayblock.save();
     }
@@ -88,5 +96,9 @@ class DialogController extends GetxController {
 
     input = box.values.toList();
     daysList.value = input;
+  }
+
+  void deleteNote() {
+    tasks.value = tasks.removeLast();
   }
 }

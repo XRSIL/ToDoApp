@@ -5,6 +5,7 @@ import 'views/settings_page/settings_body.dart';
 import 'package:get/get.dart';
 import 'package:flutter/cupertino.dart';
 import 'models/tasks_dayblock_model.dart';
+import 'models/tasks_notes_model.dart';
 import 'package:hive/hive.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 
@@ -15,6 +16,7 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Hive.initFlutter();
   Hive.registerAdapter(DayBlockAdapter());
+  Hive.registerAdapter(NoteModelAdapter());
 
   await Hive.openBox<DayBlock>('dayblocks');
 

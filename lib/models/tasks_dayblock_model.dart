@@ -9,4 +9,7 @@ class DayBlock extends HiveObject {
 
   @HiveField(1)
   List notes;
+
+  @HiveField(2)
+  DateTime datetime;
 }

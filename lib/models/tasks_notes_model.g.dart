@@ -1,37 +1,40 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'tasks_dayblock_model.dart';
+part of 'tasks_notes_model.dart';
 
 // **************************************************************************
 // TypeAdapterGenerator
 // **************************************************************************
 
-class DayBlockAdapter extends TypeAdapter<DayBlock> {
+class NoteModelAdapter extends TypeAdapter<NoteModel> {
   @override
-  final int typeId = 0;
+  final int typeId = 1;
 
   @override
-  DayBlock read(BinaryReader reader) {
+  NoteModel read(BinaryReader reader) {
     final numOfFields = reader.readByte();
     final fields = <int, dynamic>{
       for (int i = 0; i < numOfFields; i++) reader.readByte(): reader.read(),
     };
-    return DayBlock()
-      ..date = fields[0] as String
-      ..notes = (fields[1] as List)?.cast<dynamic>()
-      ..datetime = fields[2] as DateTime;
+    return NoteModel()
+      ..radio = fields[0] as bool
+      ..note = fields[1] as String
+      ..radioColor = fields[2] as String
+      ..insideRadioColor = fields[3] as String;
   }
 
   @override
-  void write(BinaryWriter writer, DayBlock obj) {
+  void write(BinaryWriter writer, NoteModel obj) {
     writer
-      ..writeByte(3)
+      ..writeByte(4)
       ..writeByte(0)
-      ..write(obj.date)
+      ..write(obj.radio)
       ..writeByte(1)
-      ..write(obj.notes)
+      ..write(obj.note)
       ..writeByte(2)
-      ..write(obj.datetime);
+      ..write(obj.radioColor)
+      ..writeByte(3)
+      ..write(obj.insideRadioColor);
   }
 
   @override
@@ -40,7 +43,7 @@ class DayBlockAdapter extends TypeAdapter<DayBlock> {
   @override
   bool operator ==(Object other) =>
       identical(this, other) ||
-      other is DayBlockAdapter &&
+      other is NoteModelAdapter &&
           runtimeType == other.runtimeType &&
           typeId == other.typeId;
 }
