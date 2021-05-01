@@ -5,11 +5,13 @@ part 'tasks_notes_model.g.dart';
 @HiveType(typeId: 1)
 class NoteModel extends HiveObject {
   @HiveField(0)
-  bool radio;
+  String date;
   @HiveField(1)
-  String note;
+  bool radio;
   @HiveField(2)
-  String radioColor;
+  String note;
   @HiveField(3)
+  String radioColor;
+  @HiveField(4)
   String insideRadioColor;
 }

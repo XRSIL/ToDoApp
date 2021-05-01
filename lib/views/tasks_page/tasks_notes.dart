@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../../controllers/tasks_page/tasks_dialog_controller.dart';
+import '../../controllers/tasks_page/tasks_notelist_controller.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_swipe_action_cell/flutter_swipe_action_cell.dart';
 
@@ -15,6 +16,7 @@ class NotesListView extends StatefulWidget {
 
 class _NotesListViewState extends State<NotesListView> {
   final controller = Get.put(DialogController());
+  final notesController = Get.put(NoteListController());
 
   @override
   Widget build(BuildContext context) {
@@ -33,6 +35,7 @@ class _NotesListViewState extends State<NotesListView> {
                     alignment: Alignment.centerLeft,
                     child: Container(
                       child: SwipeActionCell(
+                        isDraggable: controller.swipeCell.value,
                         backgroundColor: Colors.white,
                         key: ObjectKey(widget.content[index].note),
                         performsFirstActionWithFullSwipe: true,
@@ -63,7 +66,9 @@ class _NotesListViewState extends State<NotesListView> {
                                 ///And after delete animation,setState will called to
                                 /// sync your data source with your UI
                                 await handler(true);
-                                controller.deleteNote();
+                                controller.deleteNote(
+                                    widget.content[index], index);
+                                setState(() {});
                               },
                               color: Colors.red),
                         ],
@@ -97,7 +102,8 @@ class _NotesListViewState extends State<NotesListView> {
                                   width: 36,
                                 ),
                               ),
-                              onTap: () => {},
+                              onTap: () => controller.radioButtonStateChanger(
+                                  widget.content[index], index),
                             ),
                             Container(
                               width: 230,
@@ -108,6 +114,11 @@ class _NotesListViewState extends State<NotesListView> {
                                           width: 0.75))),
                               padding: EdgeInsets.only(top: 15),
                               child: CupertinoTextFormFieldRow(
+                                expands: true,
+                                onChanged: (value) =>
+                                    notesController.taskToHive(
+                                        widget.content[index], index, value),
+                                onTap: controller.disposeSwipeCell,
                                 initialValue: widget.content[index].note,
                                 keyboardType: TextInputType.multiline,
                                 maxLines: null,

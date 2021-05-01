@@ -81,11 +81,12 @@ class AddBlockDialog extends StatelessWidget {
                     autocorrect: true,
                   ),
                 ),
+                /*
                 Center(
                   child: Obx(() => (Text('${controller.text}',
                       style:
                           TextStyle(color: Color(0xFF000000), fontSize: 17)))),
-                ),
+                ),*/
                 Column(
                   children: [
                     Container(

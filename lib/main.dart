@@ -8,6 +8,7 @@ import 'models/tasks_dayblock_model.dart';
 import 'models/tasks_notes_model.dart';
 import 'package:hive/hive.dart';
 import 'package:hive_flutter/hive_flutter.dart';
+import 'controllers/tasks_page/tasks_dialog_controller.dart';
 
 // !! NOTE !!
 // If date is already in database, then add task to already existing block
@@ -24,10 +25,13 @@ void main() async {
 }
 
 class MyApp extends StatelessWidget {
+  final tasksSwipeCellController = Get.put(DialogController());
+
   void hideKeyboard(BuildContext context) {
     FocusScopeNode currentFocus = FocusScope.of(context);
     if (!currentFocus.hasPrimaryFocus && currentFocus.focusedChild != null) {
       FocusManager.instance.primaryFocus.unfocus();
+      tasksSwipeCellController.activateSwipeCell();
     }
   }
 

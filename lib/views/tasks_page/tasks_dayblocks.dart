@@ -50,7 +50,10 @@ class DayListView extends StatelessWidget {
                                       child: InkWell(
                                           highlightColor: Colors.white,
                                           splashColor: Colors.white,
-                                          onTap: () {},
+                                          onTap: () {
+                                            controller.addNote(controller
+                                                .daysList[index].date);
+                                          },
                                           child: Image.asset(
                                             'lib/images/tasks_page/add_note.png',
                                             height: 32,
