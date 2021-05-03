@@ -14,4 +14,6 @@ class NoteModel extends HiveObject {
   String radioColor;
   @HiveField(4)
   String insideRadioColor;
+  @HiveField(5)
+  bool focus;
 }

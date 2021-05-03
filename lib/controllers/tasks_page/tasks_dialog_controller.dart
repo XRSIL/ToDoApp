@@ -72,7 +72,8 @@ class DialogController extends GetxController {
       ..radio = false
       ..note = task.value
       ..radioColor = '0xFFB4B4B4'
-      ..insideRadioColor = '0xFFFFFFFF';
+      ..insideRadioColor = '0xFFFFFFFF'
+      ..focus = false;
 
     final box = DialogController.getDayBlocks();
 
@@ -93,7 +94,7 @@ class DialogController extends GetxController {
         '${DateFormat('EEEE').format(DateTime.now())}, ${DateFormat('d').format(DateTime.now())} ${DateFormat('MMMM').format(DateTime.now()).substring(0, 3)}, ${DateFormat('y').format(DateTime.now())}, ${DateFormat('Hm').format(DateTime.now())}';
   }
 
-  var daysList = [].obs;
+  final daysList = [].obs;
 
   void getDaysList(input) {
     final box = DialogController.getDayBlocks();
@@ -114,19 +115,17 @@ class DialogController extends GetxController {
     final note = NoteModel()
       ..date = date
       ..radio = false
-      ..note = 'ergerer'
+      ..note = ''
       ..radioColor = '0xFFB4B4B4'
-      ..insideRadioColor = '0xFFFFFFFF';
+      ..insideRadioColor = '0xFFFFFFFF'
+      ..focus = true;
 
     final box = DialogController.getDayBlocks();
 
     final dayblock = box.get(date);
-    final updatedList = box.get(date).notes;
-    updatedList.add(note);
-    dayblock.notes = updatedList;
+    dayblock.notes.add(note);
     box.put(date, dayblock);
     dayblock.save();
-    getDaysList(daysList);
   }
 
   // Если удалять несколько заметок подряд быстро, то некоторые не удалятся
@@ -138,7 +137,6 @@ class DialogController extends GetxController {
     dayblock.notes = updatedList;
     box.put(noteInstance.date, dayblock);
     dayblock.save();
-    getDaysList(daysList);
   }
 
   void radioButtonStateChanger(noteInstance, index) {

@@ -75,36 +75,37 @@ class _NotesListViewState extends State<NotesListView> {
                         child: Row(
                           children: [
                             InkWell(
-                              child: Container(
                                 child: Container(
-                                  margin: EdgeInsets.only(right: 10),
-                                  decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.circular(20),
-                                    border: Border.all(
-                                        color: Color(int.parse(
-                                            widget.content[index].radioColor)),
-                                        width: 3),
-                                    color: Colors.white,
-                                  ),
-                                  child: Center(
-                                    child: Container(
-                                      decoration: BoxDecoration(
+                                  child: Container(
+                                    margin: EdgeInsets.only(right: 10),
+                                    decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.circular(20),
+                                      border: Border.all(
                                           color: Color(int.parse(widget
-                                              .content[index]
-                                              .insideRadioColor)),
-                                          borderRadius:
-                                              BorderRadius.circular(20)),
-                                      height: 20,
-                                      width: 20,
+                                              .content[index].radioColor)),
+                                          width: 3),
+                                      color: Colors.white,
                                     ),
+                                    child: Center(
+                                      child: Container(
+                                        decoration: BoxDecoration(
+                                            color: Color(int.parse(widget
+                                                .content[index]
+                                                .insideRadioColor)),
+                                            borderRadius:
+                                                BorderRadius.circular(20)),
+                                        height: 20,
+                                        width: 20,
+                                      ),
+                                    ),
+                                    height: 36,
+                                    width: 36,
                                   ),
-                                  height: 36,
-                                  width: 36,
                                 ),
-                              ),
-                              onTap: () => controller.radioButtonStateChanger(
-                                  widget.content[index], index),
-                            ),
+                                onTap: () => {
+                                      controller.radioButtonStateChanger(
+                                          widget.content[index], index),
+                                    }),
                             Container(
                               width: 230,
                               decoration: BoxDecoration(
@@ -115,6 +116,7 @@ class _NotesListViewState extends State<NotesListView> {
                               padding: EdgeInsets.only(top: 15),
                               child: CupertinoTextFormFieldRow(
                                 expands: true,
+                                autofocus: widget.content[index].focus,
                                 onChanged: (value) =>
                                     notesController.taskToHive(
                                         widget.content[index], index, value),

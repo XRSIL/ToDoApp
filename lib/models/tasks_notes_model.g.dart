@@ -21,13 +21,14 @@ class NoteModelAdapter extends TypeAdapter<NoteModel> {
       ..radio = fields[1] as bool
       ..note = fields[2] as String
       ..radioColor = fields[3] as String
-      ..insideRadioColor = fields[4] as String;
+      ..insideRadioColor = fields[4] as String
+      ..focus = fields[5] as bool;
   }
 
   @override
   void write(BinaryWriter writer, NoteModel obj) {
     writer
-      ..writeByte(5)
+      ..writeByte(6)
       ..writeByte(0)
       ..write(obj.date)
       ..writeByte(1)
@@ -37,7 +38,9 @@ class NoteModelAdapter extends TypeAdapter<NoteModel> {
       ..writeByte(3)
       ..write(obj.radioColor)
       ..writeByte(4)
-      ..write(obj.insideRadioColor);
+      ..write(obj.insideRadioColor)
+      ..writeByte(5)
+      ..write(obj.focus);
   }
 
   @override
