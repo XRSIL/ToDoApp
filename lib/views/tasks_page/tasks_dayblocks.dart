@@ -3,16 +3,21 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import '../../controllers/tasks_page/tasks_dialog_controller.dart';
 import '../../controllers/tasks_page/tasks_notelist_controller.dart';
+import '../../controllers/settings_page/settings_tasks_controller.dart';
 import 'tasks_notes.dart';
 
 class DayListView extends StatelessWidget {
   final controller = Get.put(DialogController());
   final notesController = Get.put(NoteListController());
+  final TasksSettingsController settingsController =
+      Get.put(TasksSettingsController());
+
   static const block_title = const Color(0xFF00C98B);
   static const backgroundColor = Color(0xFFA8A8A8);
   @override
   Widget build(BuildContext context) {
     controller.getDaysList(controller.daysList);
+    settingsController.getSwitcherValue();
     return Container(
         child: Obx(() => (ListView.builder(
             itemCount: controller.daysList.length,

@@ -1,11 +1,13 @@
 import 'dart:io';
 import 'package:flutter/material.dart';
+import 'package:getx_todoapp/controllers/settings_page/settings_tasks_controller.dart';
 import 'views/tasks_page/tasks_body.dart';
 import 'views/settings_page/settings_body.dart';
 import 'package:get/get.dart';
 import 'package:flutter/cupertino.dart';
 import 'models/tasks_dayblock_model.dart';
 import 'models/tasks_notes_model.dart';
+import 'models/settings_delete_switcher_model.dart';
 import 'package:hive/hive.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'controllers/tasks_page/tasks_dialog_controller.dart';
@@ -18,8 +20,10 @@ void main() async {
   await Hive.initFlutter();
   Hive.registerAdapter(DayBlockAdapter());
   Hive.registerAdapter(NoteModelAdapter());
+  Hive.registerAdapter(DeleteSwitcherAdapter());
 
   await Hive.openBox<DayBlock>('dayblocks');
+  await Hive.openBox<DeleteSwitcher>('settings_tasks');
 
   runApp(MyApp());
 }

@@ -1,9 +1,4 @@
-import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:intl/intl.dart';
-import 'package:hive/hive.dart';
-import '../../models/tasks_dayblock_model.dart';
-import '../../models/tasks_notes_model.dart';
 import '../../controllers/tasks_page/tasks_dialog_controller.dart';
 
 class NoteListController extends GetxController {

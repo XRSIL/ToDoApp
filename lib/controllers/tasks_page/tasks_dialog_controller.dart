@@ -4,17 +4,12 @@ import 'package:intl/intl.dart';
 import 'package:hive/hive.dart';
 import '../../models/tasks_dayblock_model.dart';
 import '../../models/tasks_notes_model.dart';
-
-class EachNote {
-  bool radio;
-  String note;
-  Color radioColor;
-  Color insideRadioColor;
-
-  EachNote({this.radio, this.note, this.radioColor, this.insideRadioColor});
-}
+import '../settings_page/settings_tasks_controller.dart';
 
 class DialogController extends GetxController {
+  final TasksSettingsController settingsController =
+      Get.put(TasksSettingsController());
+
   final datetime =
       '${DateFormat('EEEE').format(DateTime.now())}, ${DateFormat('d').format(DateTime.now())} ${DateFormat('MMMM').format(DateTime.now()).substring(0, 3)}, ${DateFormat('y').format(DateTime.now())}, ${DateFormat('Hm').format(DateTime.now())}'
           .obs;
@@ -156,5 +151,13 @@ class DialogController extends GetxController {
     box.put(noteInstance.date, dayblock);
     dayblock.save();
     getDaysList(daysList);
+    if (settingsController.deleteMarkedNotes.value == true) {
+      Future.delayed(const Duration(milliseconds: 1000), () {
+        updatedList.removeAt(index);
+        box.put(noteInstance.date, dayblock);
+        dayblock.save();
+        getDaysList(daysList);
+      });
+    }
   }
 }
