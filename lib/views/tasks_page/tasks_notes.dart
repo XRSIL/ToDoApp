@@ -121,7 +121,10 @@ class _NotesListViewState extends State<NotesListView> {
                                 autofocus: widget.content[index].focus,
                                 onChanged: (value) =>
                                     notesController.taskToHive(
-                                        widget.content[index], index, value),
+                                        widget.content[index],
+                                        index,
+                                        value,
+                                        'from_notes'),
                                 onTap: controller.disposeSwipeCell,
                                 initialValue: widget.content[index].note,
                                 keyboardType: TextInputType.multiline,

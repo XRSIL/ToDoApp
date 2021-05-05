@@ -193,7 +193,7 @@ class DialogController extends GetxController {
     );
   }
 
-  final currentNoteTextFieldValue = CurrentNote().obs;
+  final currentNoteTextFieldValue = CurrentNote(text: '').obs;
 
   changeCurrentNote(noteInstance, index, value) =>
       currentNoteTextFieldValue.value =

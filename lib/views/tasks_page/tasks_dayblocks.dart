@@ -58,10 +58,26 @@ class DayListView extends StatelessWidget {
                                           highlightColor: Colors.white,
                                           splashColor: Colors.white,
                                           onTap: () {
-                                            controller.addNote(controller
-                                                .daysList[index].datetime);
-                                            controller.getDaysList(
-                                                controller.daysList);
+                                            if (FocusScope.of(context)
+                                                    .hasPrimaryFocus &&
+                                                FocusScope.of(context)
+                                                        .focusedChild ==
+                                                    null) {
+                                              controller.addNote(controller
+                                                  .daysList[index].datetime);
+                                              controller.getDaysList(
+                                                  controller.daysList);
+                                              notesController.taskToHive(
+                                                  controller.daysList[index],
+                                                  controller
+                                                      .daysList[index].notes
+                                                      .indexOf(controller
+                                                          .daysList[index]
+                                                          .notes
+                                                          .last),
+                                                  '',
+                                                  'from_dayblocks');
+                                            }
                                           },
                                           child: Image.asset(
                                             'lib/images/tasks_page/add_note.png',

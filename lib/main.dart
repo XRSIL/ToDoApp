@@ -39,11 +39,18 @@ class MyApp extends StatelessWidget {
     if (!currentFocus.hasPrimaryFocus && currentFocus.focusedChild != null) {
       FocusManager.instance.primaryFocus.unfocus();
       tasksSwipeCellController.activateSwipeCell();
-      if (tasksSwipeCellController.currentNoteTextFieldValue.value.text == '') {
-        tasksSwipeCellController.deleteNote(
-            tasksSwipeCellController
-                .currentNoteTextFieldValue.value.noteInstance,
-            tasksSwipeCellController.currentNoteTextFieldValue.value.index);
+      if ((tasksSwipeCellController.currentNoteTextFieldValue.value.text ==
+              '') |
+          (tasksSwipeCellController.currentNoteTextFieldValue.value.text ==
+              null)) {
+        if (tasksSwipeCellController
+                .currentNoteTextFieldValue.value.noteInstance !=
+            null) {
+          tasksSwipeCellController.deleteNote(
+              tasksSwipeCellController
+                  .currentNoteTextFieldValue.value.noteInstance,
+              tasksSwipeCellController.currentNoteTextFieldValue.value.index);
+        }
       }
     }
   }
