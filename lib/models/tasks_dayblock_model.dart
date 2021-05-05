@@ -11,5 +11,5 @@ class DayBlock extends HiveObject {
   List notes;
 
   @HiveField(2)
-  DateTime datetime;
+  int datetime;
 }

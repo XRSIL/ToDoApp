@@ -47,7 +47,7 @@ class DayListView extends StatelessWidget {
                                       style: TextStyle(
                                           color: block_title,
                                           fontWeight: FontWeight.w600,
-                                          fontSize: 28),
+                                          fontSize: 35),
                                     ),
                                   ],
                                 ),
@@ -59,7 +59,7 @@ class DayListView extends StatelessWidget {
                                           splashColor: Colors.white,
                                           onTap: () {
                                             controller.addNote(controller
-                                                .daysList[index].date);
+                                                .daysList[index].datetime);
                                             controller.getDaysList(
                                                 controller.daysList);
                                           },

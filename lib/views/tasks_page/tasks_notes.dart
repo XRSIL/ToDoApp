@@ -115,6 +115,8 @@ class _NotesListViewState extends State<NotesListView> {
                                           width: 0.75))),
                               padding: EdgeInsets.only(top: 15),
                               child: CupertinoTextFormFieldRow(
+                                textCapitalization:
+                                    TextCapitalization.sentences,
                                 expands: true,
                                 autofocus: widget.content[index].focus,
                                 onChanged: (value) =>
@@ -128,7 +130,7 @@ class _NotesListViewState extends State<NotesListView> {
                                 style: TextStyle(
                                     color: Colors.black,
                                     fontWeight: FontWeight.w300,
-                                    fontSize: 18),
+                                    fontSize: 22),
                               ),
                             ),
                           ],

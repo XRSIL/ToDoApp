@@ -17,7 +17,7 @@ class NoteModelAdapter extends TypeAdapter<NoteModel> {
       for (int i = 0; i < numOfFields; i++) reader.readByte(): reader.read(),
     };
     return NoteModel()
-      ..date = fields[0] as String
+      ..date = fields[0] as int
       ..radio = fields[1] as bool
       ..note = fields[2] as String
       ..radioColor = fields[3] as String

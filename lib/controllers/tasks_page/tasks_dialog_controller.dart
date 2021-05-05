@@ -17,12 +17,16 @@ class DialogController extends GetxController {
       '${DateFormat('E').format(DateTime.now())}, ${DateFormat('d').format(DateTime.now())} ${DateFormat('MMMM').format(DateTime.now()).substring(0, 3)}'
           .obs;
 
+  final hiveDateKey = DateTime.now().obs;
+
   final tasks = [].obs;
   final task = ''.obs;
   final swipeCell = true.obs;
 
   changeDate(date) => datetime.value =
       '${DateFormat('EEEE').format(date)}, ${DateFormat('d').format(date)} ${DateFormat('MMMM').format(date).substring(0, 3)}, ${DateFormat('y').format(date)}, ${DateFormat('Hm').format(date)}';
+
+  changeDateKey(date) => hiveDateKey.value = date;
 
   setDate(input) => date.value =
       '${DateFormat('E').format(input)}, ${DateFormat('d').format(input)} ${DateFormat('MMMM').format(input).substring(0, 3)}';
@@ -51,19 +55,23 @@ class DialogController extends GetxController {
 
   changeValue(input) => text.value = input; // Need to delete this method later
 
-  clearController() => taskInputController.clear();
+  clearController() => {
+        Future.delayed(const Duration(milliseconds: 1000), () {
+          taskInputController.clear();
+        })
+      };
 
   static Box<DayBlock> getDayBlocks() => Hive.box<DayBlock>('dayblocks');
 
   // ignore: missing_return
-  Future addDayBlock(String date, List notes) {
+  Future addDayBlock(String date, List notes, DateTime dateKey) {
     final dayblock = DayBlock()
       ..date = date
       ..notes = notes
-      ..datetime = DateTime.now();
+      ..datetime = dateKey.toUtc().millisecondsSinceEpoch ~/ 10000;
 
     final note = NoteModel()
-      ..date = ''
+      ..date = 0
       ..radio = false
       ..note = task.value
       ..radioColor = '0xFFB4B4B4'
@@ -74,14 +82,14 @@ class DialogController extends GetxController {
 
     if (box.containsKey(dayblock.date) == true) {
       dayblock.notes = box.get(dayblock.date).notes;
-      note.date = dayblock.date;
+      note.date = dayblock.datetime;
       dayblock.notes.add(note);
-      box.put(dayblock.date, dayblock);
+      box.put(dayblock.datetime, dayblock);
       dayblock.save();
     } else {
-      note.date = dayblock.date;
+      note.date = dayblock.datetime;
       dayblock.notes = [note];
-      box.put(dayblock.date, dayblock);
+      box.put(dayblock.datetime, dayblock);
       dayblock.save();
     }
 

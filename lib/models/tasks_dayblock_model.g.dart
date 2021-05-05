@@ -19,7 +19,7 @@ class DayBlockAdapter extends TypeAdapter<DayBlock> {
     return DayBlock()
       ..date = fields[0] as String
       ..notes = (fields[1] as List)?.cast<dynamic>()
-      ..datetime = fields[2] as DateTime;
+      ..datetime = fields[2] as int;
   }
 
   @override

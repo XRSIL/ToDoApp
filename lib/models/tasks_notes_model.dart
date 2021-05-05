@@ -5,7 +5,7 @@ part 'tasks_notes_model.g.dart';
 @HiveType(typeId: 1)
 class NoteModel extends HiveObject {
   @HiveField(0)
-  String date;
+  int date;
   @HiveField(1)
   bool radio;
   @HiveField(2)

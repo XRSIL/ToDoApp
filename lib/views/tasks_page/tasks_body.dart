@@ -25,7 +25,7 @@ class TasksPage extends StatelessWidget {
           'Your tasks',
           style: TextStyle(
             color: Color(0xFF000000),
-            fontSize: 22,
+            fontSize: 26,
             fontWeight: FontWeight.w700,
           ),
         ),

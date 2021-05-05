@@ -16,7 +16,7 @@ class SettingsPage extends StatelessWidget {
           'Settings',
           style: TextStyle(
             color: Color(0xFF000000),
-            fontSize: 22,
+            fontSize: 26,
             fontWeight: FontWeight.w700,
           ),
         ),
@@ -51,7 +51,7 @@ class SettingsPage extends StatelessWidget {
                                   alignment: Alignment.centerLeft,
                                   child: Text(
                                     'Delete Marked Notes',
-                                    style: TextStyle(fontSize: 17),
+                                    style: TextStyle(fontSize: 20),
                                   ),
                                 ),
                                 Spacer(),
