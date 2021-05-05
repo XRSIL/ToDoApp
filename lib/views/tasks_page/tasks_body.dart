@@ -38,6 +38,7 @@ class TasksPage extends StatelessWidget {
               width: 32,
             ),
             onPressed: () => {
+              FocusManager.instance.primaryFocus.unfocus(),
               showCupertinoModalBottomSheet(
                   isDismissible: true,
                   expand: true,

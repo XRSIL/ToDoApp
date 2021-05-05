@@ -5,6 +5,14 @@ import 'package:hive/hive.dart';
 import '../../models/tasks_dayblock_model.dart';
 import '../../models/tasks_notes_model.dart';
 import '../settings_page/settings_tasks_controller.dart';
+import 'package:keyboard_visibility/keyboard_visibility.dart';
+
+class CurrentNote {
+  NoteModel noteInstance;
+  int index;
+  String text;
+  CurrentNote({this.noteInstance, this.index, this.text});
+}
 
 class DialogController extends GetxController {
   final TasksSettingsController settingsController =
@@ -139,7 +147,12 @@ class DialogController extends GetxController {
     updatedList.removeAt(index);
     dayblock.notes = updatedList;
     box.put(noteInstance.date, dayblock);
-    dayblock.save();
+    if (updatedList.isEmpty) {
+      box.delete(noteInstance.date);
+      getDaysList(daysList);
+    } else {
+      dayblock.save();
+    }
   }
 
   void radioButtonStateChanger(noteInstance, index) {
@@ -168,4 +181,21 @@ class DialogController extends GetxController {
       });
     }
   }
+
+  final isKeyboardVisible = false.obs;
+
+  void hideTabBar() {
+    isKeyboardVisible.value = false;
+    KeyboardVisibilityNotification().addNewListener(
+      onChange: (isVisible) {
+        isKeyboardVisible.value = isVisible;
+      },
+    );
+  }
+
+  final currentNoteTextFieldValue = CurrentNote().obs;
+
+  changeCurrentNote(noteInstance, index, value) =>
+      currentNoteTextFieldValue.value =
+          CurrentNote(noteInstance: noteInstance, index: index, text: value);
 }

@@ -10,6 +10,7 @@ class NoteListController extends GetxController {
     final updatedList = box.get(noteInstance.date).notes;
     updatedList[index].focus = false;
     updatedList[index].note = value;
+    dialogController.changeCurrentNote(noteInstance, index, value);
     dayblock.notes = updatedList;
     box.put(noteInstance.date, dayblock);
     dayblock.save();

@@ -95,7 +95,7 @@ class AddBlockDialog extends StatelessWidget {
                                 color: Color(0xFFBABABA), width: 0.5),
                             top: BorderSide(
                                 color: Color(0xFFBABABA), width: 0.5))),
-                    margin: EdgeInsets.fromLTRB(0, 30, 0, 20),
+                    margin: EdgeInsets.fromLTRB(0, 22, 0, 20),
                     child: CupertinoTextFormFieldRow(
                       autofocus: true,
                       textCapitalization: TextCapitalization.sentences,
