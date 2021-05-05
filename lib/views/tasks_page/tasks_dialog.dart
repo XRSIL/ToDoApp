@@ -67,14 +67,35 @@ class AddBlockDialog extends StatelessWidget {
                             ),
                           ),
                           onPressed: () {
-                            controller.setTasks(controller.task.value);
-                            controller.addDayBlock('${controller.date.value}',
-                                controller.tasks, controller.hiveDateKey.value);
-                            controller.getDaysList(controller.daysList);
-                            Navigator.of(context).pop();
-                            controller.clearDate();
-                            controller.clearController();
-                            controller.changeValue('');
+                            if (controller.task.value != '') {
+                              controller.setTasks(controller.task.value);
+                              controller.addDayBlock(
+                                  '${controller.date.value}',
+                                  controller.tasks,
+                                  controller.hiveDateKey.value);
+                              controller.getDaysList(controller.daysList);
+                              Navigator.of(context).pop();
+                              controller.clearDate();
+                              controller.clearController();
+                              controller.changeValue('');
+                            } else {
+                              showCupertinoDialog(
+                                context: context,
+                                builder: (BuildContext context) {
+                                  return CupertinoAlertDialog(
+                                    title: Text('Please enter the task'),
+                                    actions: <Widget>[
+                                      CupertinoDialogAction(
+                                        child: Text('OK'),
+                                        onPressed: () {
+                                          Navigator.of(context).pop();
+                                        },
+                                      ),
+                                    ],
+                                  );
+                                },
+                              );
+                            }
                           },
                         )),
                   ),
